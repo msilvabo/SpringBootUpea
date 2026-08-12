@@ -1,5 +1,6 @@
 package com.postgrado.ecommerce.service;
 
+import com.postgrado.ecommerce.dto.PageDto;
 import com.postgrado.ecommerce.dto.ProductDto;
 import com.postgrado.ecommerce.entity.Product;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,8 @@ public interface ProductService {
     Page<Product> getProducts(Pageable pageable);
 
     Page<Product> getFilteredProducts(Double priceMin, Double priceMax, Pageable pageable);
+
+    PageDto<Product> getFilteredProductsDto(Double priceMin, Double priceMax, Pageable pageable);
 }
 
 

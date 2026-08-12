@@ -1,5 +1,6 @@
 package com.postgrado.ecommerce.controller;
 
+import com.postgrado.ecommerce.dto.PageDto;
 import com.postgrado.ecommerce.dto.ProductDto;
 import com.postgrado.ecommerce.entity.Product;
 import com.postgrado.ecommerce.service.ProductService;
@@ -53,6 +54,23 @@ public class ProductController {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<Product> productsPage = productService.getFilteredProducts(minPrice, maxPrice, pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(productsPage);
+    }
+
+
+    @GetMapping("/dto")
+    public ResponseEntity<PageDto> getFilterProductsDto(
+            @RequestParam Double minPrice,
+            @RequestParam Double maxPrice,
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String sortField,
+            @RequestParam String sortOrder
+    ) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortField);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        PageDto<Product> productsPage = productService.getFilteredProductsDto(minPrice, maxPrice, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(productsPage);
     }
 }

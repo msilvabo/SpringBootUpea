@@ -1,7 +1,9 @@
 package com.postgrado.ecommerce.mapper;
 
+import com.postgrado.ecommerce.dto.PageDto;
 import com.postgrado.ecommerce.dto.ProductDto;
 import com.postgrado.ecommerce.entity.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 
@@ -18,5 +20,16 @@ public class ProductMapper {
         product.setActive(dto.isActive());
 
         return product;
+    }
+
+    public PageDto<Product> fromEntity (Page page){
+        PageDto<Product> dto = new PageDto<>();
+        dto.setContent(page.getContent());
+        dto.setLast(page.isLast());
+        dto.setPageNumber(page.getNumber());
+        dto.setPageSize(page.getSize());
+        dto.setTotalPages(page.getTotalPages());
+        dto.setTotalElements(page.getTotalElements());
+        return dto;
     }
 }
