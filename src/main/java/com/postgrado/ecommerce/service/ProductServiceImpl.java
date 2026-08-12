@@ -8,6 +8,8 @@ import com.postgrado.ecommerce.mapper.ProductMapper;
 import com.postgrado.ecommerce.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,9 +35,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getbyId(UUID id) {
+    public Product getById(UUID id) {
         return productRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Product", id));
+    }
+
+    @Override
+    public Page<Product> getProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 }
 
