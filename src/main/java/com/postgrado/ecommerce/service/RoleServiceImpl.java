@@ -6,6 +6,8 @@ import com.postgrado.ecommerce.repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class RoleServiceImpl implements RoleService{
@@ -15,5 +17,10 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public Role getByName(String name) {
         return roleRepository.findByName(name).orElseThrow(()-> new EntityNotFoundException("Role not found"));
+    }
+
+    @Override
+    public List<Role> getAll() {
+        return roleRepository.findAll();
     }
 }

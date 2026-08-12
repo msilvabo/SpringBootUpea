@@ -59,7 +59,7 @@ public class ProductController {
 
 
     @GetMapping("/dto")
-    public ResponseEntity<PageDto> getFilterProductsDto(
+    public ResponseEntity<PageDto<Product>> getFilterProductsDto(
             @RequestParam Double minPrice,
             @RequestParam Double maxPrice,
             @RequestParam int page,

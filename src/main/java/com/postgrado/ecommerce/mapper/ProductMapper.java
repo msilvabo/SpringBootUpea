@@ -22,7 +22,7 @@ public class ProductMapper {
         return product;
     }
 
-    public PageDto<Product> fromEntity (Page page){
+    public PageDto<Product> fromEntity (Page<Product> page){
         PageDto<Product> dto = new PageDto<>();
         dto.setContent(page.getContent());
         dto.setLast(page.isLast());

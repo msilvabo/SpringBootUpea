@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/roles")
@@ -20,5 +22,11 @@ public class RoleController {
     public ResponseEntity<Role> getByName(@PathVariable String name){
         Role role = roleService.getByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(role);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Role>> getAll(){
+        List<Role> roles = roleService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(roles);
     }
 }

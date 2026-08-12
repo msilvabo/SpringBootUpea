@@ -1,6 +1,5 @@
 package com.postgrado.ecommerce.dto;
 
-import com.postgrado.ecommerce.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
