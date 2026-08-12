@@ -5,7 +5,6 @@ import com.postgrado.ecommerce.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface ProductService {
@@ -14,6 +13,8 @@ public interface ProductService {
     Product getById(UUID id);
 
     Page<Product> getProducts(Pageable pageable);
+
+    Page<Product> getFilteredProducts(Double priceMin, Double priceMax, Pageable pageable);
 }
 
 

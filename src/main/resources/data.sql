@@ -1,12 +1,12 @@
 -- Defaul categories --
 
-INSERT INTO categories (id, description, name) VALUES ('9f70510a-06c3-4676-b492-403dd6a41281', 'Mochila Viajes', 'Travel');
-INSERT INTO categories (id, description, name) VALUES ('b57b9f94-f38e-4e1d-b56d-69a7fce3b5ce', 'Mochila deportivas', 'Sport');
-INSERT INTO categories (id, description, name) VALUES ('48e960ff-a6f6-4c27-92de-840b14b7b5f1', 'Mochila de Trabajo', 'Work');
+INSERT INTO categories (id, description, name) VALUES ('9f70510a-06c3-4676-b492-403dd6a41281', 'Mochila Viajes', 'Travel') ON CONFLICT (id) DO NOTHING;
+INSERT INTO categories (id, description, name) VALUES ('b57b9f94-f38e-4e1d-b56d-69a7fce3b5ce', 'Mochila deportivas', 'Sport') ON CONFLICT (id) DO NOTHING;
+INSERT INTO categories (id, description, name) VALUES ('48e960ff-a6f6-4c27-92de-840b14b7b5f1', 'Mochila de Trabajo', 'Work') ON CONFLICT (id) DO NOTHING;
 
 -- Defaul roles --
-INSERT INTO roles (id, description, name) VALUES ('f0ebb31c-7b98-4e37-a67a-4a9f3f8cd295', 'Role Administrator', 'admin');
-INSERT INTO roles (id, description, name) VALUES ('e5c70e3e-b3f3-4225-8ec7-a5075ab86242', 'Role user', 'user');
+INSERT INTO roles (id, description, name) VALUES ('f0ebb31c-7b98-4e37-a67a-4a9f3f8cd295', 'Role Administrator', 'admin') ON CONFLICT (id) DO NOTHING;
+INSERT INTO roles (id, description, name) VALUES ('e5c70e3e-b3f3-4225-8ec7-a5075ab86242', 'Role user', 'user') ON CONFLICT (id) DO NOTHING;
 
 -- Defaul products --
 INSERT INTO products (active, price, stock, category_id, id, name, description, image_url) VALUES
@@ -59,4 +59,4 @@ INSERT INTO products (active, price, stock, category_id, id, name, description, 
                                                                                                                (true, 84.00, 8, '9f70510a-06c3-4676-b492-403dd6a41281', gen_random_uuid(), 'Mochila Flight Ready', 'Cumple con estándares de aerolíneas', 'http://image.png'),
                                                                                                                (true, 56.00, 14, 'b57b9f94-f38e-4e1d-b56d-69a7fce3b5ce', gen_random_uuid(), 'Mochila Sport Dynamic', 'Ergonómica y ligera para deporte', 'http://image.png'),
                                                                                                                (true, 32.00, 38, '48e960ff-a6f6-4c27-92de-840b14b7b5f1', gen_random_uuid(), 'Mochila City Life', 'Diseño moderno para la ciudad', 'http://image.png'),
-                                                                                                               (true, 92.00, 7, '9f70510a-06c3-4676-b492-403dd6a41281', gen_random_uuid(), 'Mochila World Tour', 'Preparada para cualquier clima', 'http://image.png');
+                                                                                                               (true, 92.00, 7, '9f70510a-06c3-4676-b492-403dd6a41281', gen_random_uuid(), 'Mochila World Tour', 'Preparada para cualquier clima', 'http://image.png') ON CONFLICT (id) DO NOTHING;
