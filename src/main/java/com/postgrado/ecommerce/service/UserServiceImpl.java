@@ -24,4 +24,14 @@ public class UserServiceImpl implements UserService{
         );
         return userMapper.fromEntity(user);
     }
+
+    @Override
+    public User create(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
 }
