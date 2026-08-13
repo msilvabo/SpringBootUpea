@@ -1,8 +1,6 @@
 package com.postgrado.ecommerce.dto;
 
 import com.postgrado.ecommerce.entity.Role;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

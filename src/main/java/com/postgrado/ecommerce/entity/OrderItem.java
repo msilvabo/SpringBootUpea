@@ -1,5 +1,6 @@
 package com.postgrado.ecommerce.entity;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,22 +8,22 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "order_items")
+public class OrderItem {
     @Id
     @GeneratedValue
     private UUID id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String address;
+    private Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

@@ -1,7 +1,6 @@
 package com.postgrado.ecommerce.controller;
 
 import com.postgrado.ecommerce.dto.UserDto;
-import com.postgrado.ecommerce.entity.User;
 import com.postgrado.ecommerce.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
