@@ -5,9 +5,11 @@ import com.postgrado.ecommerce.dto.OrderItemDto;
 import com.postgrado.ecommerce.entity.Order;
 import com.postgrado.ecommerce.entity.OrderItem;
 import com.postgrado.ecommerce.entity.Product;
+import com.postgrado.ecommerce.entity.User;
 import com.postgrado.ecommerce.exception.EntityNotFoundException;
 import com.postgrado.ecommerce.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +35,9 @@ public class OrderServiceImpl implements OrderService{
                 return item;
                 }).toList();
         order.setItems(items);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        order.setUser(user);
         Order orderSaved = orderRepository.save(order);
-        //TODO: Set user from security
         return "Order saved successful";
     }
 

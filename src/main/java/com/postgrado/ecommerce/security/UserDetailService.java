@@ -1,5 +1,6 @@
 package com.postgrado.ecommerce.security;
 
+import com.postgrado.ecommerce.repository.UserRepository;
 import com.postgrado.ecommerce.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailService implements UserDetailsService {
 
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userService.getByEmail(email);
+        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found with provider email"));
     }
 }

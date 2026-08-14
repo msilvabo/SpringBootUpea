@@ -54,7 +54,21 @@ public class RegistrationServiceImpl implements RegistrationService{
 
     @Override
     public String confirm(String token) {
-//        confirmationTokenService
-        return "";
+        ConfirmationToken confirmationToken = confirmationTokenService.getByToken(token);
+        if (confirmationToken.getConfirmedAd()!=null){
+            throw new RuntimeException("Token is already confirmed");
+        }
+        System.out.println("--- VERIFICACIÓN DE EXPIRACIÓN DE TOKEN ---");
+        System.out.println("Fecha de expiración del token: " + confirmationToken.getExpiresAt());
+        System.out.println("Fecha y hora actual del sistema: " + LocalDateTime.now());
+        boolean isExpired = confirmationToken.getExpiresAt().isBefore(LocalDateTime.now());
+        System.out.println("¿Está expirado? (isBefore): " + isExpired);
+
+        if (confirmationToken.getExpiresAt().isBefore(LocalDateTime.now())){
+            throw new RuntimeException("Token expired");
+        }
+        userService.enableUser(confirmationToken.getUser());
+        confirmationTokenService.setConfirmAt(confirmationToken);
+        return "User account has been enabled sucess";
     }
 }
