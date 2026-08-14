@@ -62,5 +62,5 @@ INSERT INTO products (active, price, stock, category_id, id, name, description, 
                                                                                                                (true, 92.00, 7, '9f70510a-06c3-4676-b492-403dd6a41281', gen_random_uuid(), 'Mochila World Tour', 'Preparada para cualquier clima', 'http://image.png') ON CONFLICT (id) DO NOTHING;
 
 -- Default users --
-INSERT INTO users (id, first_name, last_name, email, password, address, role_id) VALUES ('ef8d15d8-1c8c-4f11-8755-e23ad06f3ebb', 'Juan', 'Perez', 'jperez@gmail.com', '1111',  'direccion1', 'f0ebb31c-7b98-4e37-a67a-4a9f3f8cd295') ON CONFLICT (id) DO NOTHING;
-INSERT INTO users (id, first_name, last_name, email, password, address, role_id) VALUES ('34e0fe84-87d6-4a49-accd-c6edc31e18cc', 'Maria', 'Soliz', ',msoliz@gmail.com', '2222',  'direccion2', 'e5c70e3e-b3f3-4225-8ec7-a5075ab86242') ON CONFLICT (id) DO NOTHING;
+INSERT INTO users (id, first_name, last_name, email, password, enable, address, role_id) VALUES ('ef8d15d8-1c8c-4f11-8755-e23ad06f3ebb', 'Juan', 'Perez', 'jperez@gmail.com', '1111', true, 'direccion1', 'f0ebb31c-7b98-4e37-a67a-4a9f3f8cd295') ON CONFLICT (id) DO NOTHING;
+INSERT INTO users (id, first_name, last_name, email, password, enable, address, role_id) VALUES ('34e0fe84-87d6-4a49-accd-c6edc31e18cc', 'Maria', 'Soliz', ',msoliz@gmail.com', '2222',true,  'direccion2', 'e5c70e3e-b3f3-4225-8ec7-a5075ab86242') ON CONFLICT (id) DO NOTHING;

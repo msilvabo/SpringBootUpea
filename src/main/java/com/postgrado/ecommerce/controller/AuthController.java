@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/register")
-public class RegistrationController {
+public class AuthController {
 
     RegistrationService registrationService;
     @PostMapping

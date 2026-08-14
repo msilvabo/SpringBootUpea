@@ -2,7 +2,6 @@ package com.postgrado.ecommerce.repository;
 
 import com.postgrado.ecommerce.dto.OrderItemDto;
 import com.postgrado.ecommerce.entity.Order;
-import com.postgrado.ecommerce.entity.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

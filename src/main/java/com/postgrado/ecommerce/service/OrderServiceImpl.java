@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService{
         order.setItems(items);
         Order orderSaved = orderRepository.save(order);
         //TODO: Set user from security
-        return "Order saved succesfully";
+        return "Order saved successful";
     }
 
     @Override

@@ -4,4 +4,6 @@ import com.postgrado.ecommerce.dto.RegistrationRequestDto;
 
 public interface RegistrationService {
     String register(RegistrationRequestDto registrationRequestDto);
+
+    String confirm(String token);
 }

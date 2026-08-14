@@ -5,6 +5,7 @@ import com.postgrado.ecommerce.entity.ConfirmationToken;
 import com.postgrado.ecommerce.entity.User;
 import com.postgrado.ecommerce.exception.EmailAlreadyUsed;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class RegistrationServiceImpl implements RegistrationService{
     private UserService userService;
     private RoleService roleService;
     private ConfirmationTokenService confirmationTokenService;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public String register(RegistrationRequestDto dto) {
@@ -35,15 +37,24 @@ public class RegistrationServiceImpl implements RegistrationService{
         //TODO: Encrypt Password
         user.setPassword(dto.getPassword());
         user.setAddress(dto.getAddress());
-        user.setRole(roleService.getByName("user"));
-        userService.create(user);
 
-        // Create Confirmation Token
+        String endedPassword = passwordEncoder.encode(dto.getPassword());
+        user.setPassword(endedPassword);
+
+        user.setRole(roleService.getByName("user"));
+
+        userService.create(user);
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(5),user);
         confirmationTokenService.create(confirmationToken);
         //TODO: Send email with confirmation token
 
         return token;
+    }
+
+    @Override
+    public String confirm(String token) {
+//        confirmationTokenService
+        return "";
     }
 }
