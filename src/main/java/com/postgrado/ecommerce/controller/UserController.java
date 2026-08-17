@@ -2,6 +2,7 @@ package com.postgrado.ecommerce.controller;
 
 import com.postgrado.ecommerce.dto.UserDto;
 import com.postgrado.ecommerce.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@SecurityRequirement(name="bearerAuth")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/users")

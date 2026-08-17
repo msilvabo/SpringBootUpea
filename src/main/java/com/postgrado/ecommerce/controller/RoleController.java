@@ -2,6 +2,7 @@ package com.postgrado.ecommerce.controller;
 
 import com.postgrado.ecommerce.entity.Role;
 import com.postgrado.ecommerce.service.RoleService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@SecurityRequirement(name="bearerAuth")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/roles")

@@ -4,6 +4,10 @@ import com.postgrado.ecommerce.dto.PageDto;
 import com.postgrado.ecommerce.dto.ProductDto;
 import com.postgrado.ecommerce.entity.Product;
 import com.postgrado.ecommerce.service.ProductService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+
+@Tag(name="Product")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/products")
@@ -23,18 +29,22 @@ public class ProductController {
 
     private ProductService productService;
 
+    @SecurityRequirement(name="bearerAuth")
+    @Operation(summary = "Create new product")
     @PostMapping
     public ResponseEntity<Product> create(@Valid @RequestBody ProductDto dto) {
         Product productCreate = productService.createProduct(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(productCreate);
     }
 
+    @Operation(summary = "Get Product by ID")
     @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable UUID id) {
         Product product = productService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
+    @Operation(summary = "List Products with pagination")
     @GetMapping("/pageable")
     public ResponseEntity<Page<Product>> getProducts(@RequestParam int page, @RequestParam int size) {
         Pageable pageable = PageRequest.of(page, size);
@@ -42,6 +52,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productsPage);
     }
 
+    @Operation(summary = "Get Products Filter")
     @GetMapping()
     public ResponseEntity<Page<Product>> getFilterProducts(
             @RequestParam Double minPrice,
@@ -58,7 +69,8 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productsPage);
     }
 
-
+    @Hidden
+    @Operation(summary = "Get Product Filter Dto")
     @GetMapping("/dto")
     public ResponseEntity<PageDto<Product>> getFilterProductsDto(
             @RequestParam Double minPrice,
