@@ -1,6 +1,7 @@
 package com.postgrado.ecommerce.dto;
 
 import com.postgrado.ecommerce.entity.Role;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

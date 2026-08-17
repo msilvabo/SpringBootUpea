@@ -4,6 +4,7 @@ import com.postgrado.ecommerce.dto.PageDto;
 import com.postgrado.ecommerce.dto.ProductDto;
 import com.postgrado.ecommerce.entity.Product;
 import com.postgrado.ecommerce.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +24,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody ProductDto dto) {
+    public ResponseEntity<Product> create(@Valid @RequestBody ProductDto dto) {
         Product productCreate = productService.createProduct(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(productCreate);
     }

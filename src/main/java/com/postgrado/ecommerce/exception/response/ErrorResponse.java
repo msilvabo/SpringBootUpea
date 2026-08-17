@@ -1,4 +1,4 @@
-package com.postgrado.ecommerce.exception;
+package com.postgrado.ecommerce.exception.response;
 
 import lombok.Builder;
 import lombok.Getter;

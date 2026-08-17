@@ -1,10 +1,17 @@
 package com.postgrado.ecommerce.exception;
 
+import com.postgrado.ecommerce.exception.response.ErrorResponse;
+import com.postgrado.ecommerce.exception.response.FieldErrorModel;
+import com.postgrado.ecommerce.exception.response.ValidationErrorResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.List;
 
 @ControllerAdvice
 public class ErrorHandler {
@@ -42,6 +49,24 @@ public class ErrorHandler {
                 )
                 .build();
         return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ValidationErrorResponse> handleMethodArgumentNotValidException (MethodArgumentNotValidException e){
+
+        List<FieldErrorModel> errors = e.getBindingResult().getAllErrors().stream().map(fieldError -> {
+            FieldErrorModel fieldErrorModel = new FieldErrorModel();
+            fieldErrorModel.setCode(fieldError.getCode());
+            fieldErrorModel.setMessage(fieldError.getDefaultMessage());
+            fieldErrorModel.setField(((FieldError)fieldError).getField());
+            return fieldErrorModel;
+        }).toList();
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ValidationErrorResponse response = new ValidationErrorResponse();
+        response.setCode(status.value());
+        response.setErrors(errors);
+        return ResponseEntity.status(status).body(response);
     }
 }
 
