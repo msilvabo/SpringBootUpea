@@ -15,11 +15,21 @@ public class OrderItemDto {
     private UUID productId;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String productName;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Double totalPrice;
 
     public OrderItemDto(UUID productId, Integer quantity, Double totalPrice) {
-        this.quantity = quantity;
         this.productId = productId;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
+    public OrderItemDto(UUID productId, String productName, Integer quantity, Double totalPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
 }

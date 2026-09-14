@@ -1,0 +1,647 @@
+{
+  "info": {
+    "_postman_id": "c77a4c33-e534-468b-9fa9-3e4573498526",
+    "name": "CursoSpringBootUpea",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5438971"
+  },
+  "item": [
+    {
+      "name": "person",
+      "item": [
+        {
+          "name": "newPerson",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"name\",\r\n    \"lastName\":\"adsfadsf\",\r\n    \"age\":1123\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/person",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "person"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getAllPerson",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/person",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "person"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updatePerson",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"nombre\",\r\n    \"lastName\":\"apellido\",\r\n    \"age\":11111111\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/person/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "person",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deletePerson",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"nombre\",\r\n    \"lastName\":\"apellido\",\r\n    \"age\":11111111\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/person/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "person",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "categories",
+      "item": [
+        {
+          "name": "GetById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"name\",\r\n    \"lastName\":\"adsfadsf\",\r\n    \"age\":1123\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/categories/735cb48b-0ec2-45a8-9062-078024c9f26b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "categories",
+                "735cb48b-0ec2-45a8-9062-078024c9f26b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllCategory",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "email@gmail.com",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"name\",\r\n    \"lastName\":\"adsfadsf\",\r\n    \"age\":1123\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "product",
+      "item": [
+        {
+          "name": "newProduct",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Mochila X\",\r\n    \"description\": \"Mmochila para 20 Kilos viajera\",\r\n    \"imageUrl\": \"http://image.png\",\r\n    \"price\": 59.99,\r\n    \"stock\": 12,\r\n    \"active\": true,\r\n    \"categoryId\":\"9f70510a-06c3-4676-b492-403dd6a41281\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8085/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getProduct",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"comment\": \"Order Pack of travels\",\r\n    \"items\":[\r\n        {\r\n            \"quantity\":5,\r\n            \"productId\": \"48e960ff-a6f6-4c27-92de-840b14b7b5f1\"\r\n        },\r\n        {\r\n            \"quantity\":8,\r\n            \"productId\": \"9f70510a-06c3-4676-b492-403dd6a41281\"\r\n        }\r\n\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/products/a6c9b87c-99d6-43af-91bb-063cd7451542",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "products",
+                "a6c9b87c-99d6-43af-91bb-063cd7451542"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ProductPageable",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwtToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/roles/name/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "roles",
+                "name",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ProductFilterPageable",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/products?page=1&size=15&minPrice=30&maxPrice=40&sortField=price&sortOrder=asc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "15"
+                },
+                {
+                  "key": "minPrice",
+                  "value": "30"
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "40"
+                },
+                {
+                  "key": "sortField",
+                  "value": "price"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "asc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ProductFilterPageable Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/products?page=1&size=15&minPrice=30&maxPrice=40&sortField=price&sortOrder=asc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "15"
+                },
+                {
+                  "key": "minPrice",
+                  "value": "30"
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "40"
+                },
+                {
+                  "key": "sortField",
+                  "value": "price"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "asc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "role",
+      "item": [
+        {
+          "name": "RoleByName",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/roles/name/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "roles",
+                "name",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "userById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/users/34e0fe84-87d6-4a49-accd-c6edc31e18cc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "users",
+                "34e0fe84-87d6-4a49-accd-c6edc31e18cc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registration",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{supabase_service_role_api_key_00c3}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"firstName\":\"first\",\r\n\"lastName\":\"last\",\r\n\"email\":\"email@gmail.com\",\r\n\"password\":\"123456\",\r\n\"address\":\"local address\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8085/auth",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "confirm",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"firstName\":\"first\",\r\n\"lastName\":\"last\",\r\n\"email\":\"email@gmail.com\",\r\n\"password\":\"123456\",\r\n\"address\":\"local address\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/auth/confirm?token=ae304091-a4a1-407e-b597-24842c2dd673",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "auth",
+                "confirm"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "ae304091-a4a1-407e-b597-24842c2dd673"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 1. Obtener la respuesta en formato JSON\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "// 2. Extraer el token (Ajusta 'token' si tu API usa otro nombre, ej: jsonData.accessToken)\r",
+                  "var tokenRecibido = jsonData.accessToken;\r",
+                  "\r",
+                  "// 3. Guardar el token en la variable de entorno activa\r",
+                  "pm.environment.set(\"jwtToken\", tokenRecibido);\r",
+                  "\r",
+                  "console.log(\"Token guardado exitosamente: \" + tokenRecibido);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "/*\r\n{\r\n    \"email\":\"email@gmail.com\",\r\n    \"password\":\"123456\"\r\n}\r\n*/\r\n\r\n{\r\n    \"email\":\"jperez@gmail.com\",\r\n    \"password\":\"123456\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8085/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "order",
+      "item": [
+        {
+          "name": "New Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"comment\": \"Order Pack of travels\",\r\n    \"items\":[\r\n        {\r\n            \"quantity\":5,\r\n            \"productId\": \"a3910fa6-2def-464d-9b1a-091f432a94bc\"\r\n        },\r\n        {\r\n            \"quantity\":8,\r\n            \"productId\": \"a300bca3-1f24-4fab-a052-4aaf0aad2972\"\r\n        }\r\n\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8085/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "total",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"comment\": \"Order Pack of travels\",\r\n    \"items\":[\r\n        {\r\n            \"quantity\":5,\r\n            \"productId\": \"a3910fa6-2def-464d-9b1a-091f432a94bc\"\r\n        },\r\n        {\r\n            \"quantity\":8,\r\n            \"productId\": \"a300bca3-1f24-4fab-a052-4aaf0aad2972\"\r\n        }\r\n\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/orders/total/34ecb6ef-4f86-452a-845b-3148ec2f24b1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "orders",
+                "total",
+                "34ecb6ef-4f86-452a-845b-3148ec2f24b1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "items",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"comment\": \"Order Pack of travels\",\r\n    \"items\":[\r\n        {\r\n            \"quantity\":5,\r\n            \"productId\": \"a3910fa6-2def-464d-9b1a-091f432a94bc\"\r\n        },\r\n        {\r\n            \"quantity\":8,\r\n            \"productId\": \"a300bca3-1f24-4fab-a052-4aaf0aad2972\"\r\n        }\r\n\r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8085/orders/34ecb6ef-4f86-452a-845b-3148ec2f24b1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "orders",
+                "34ecb6ef-4f86-452a-845b-3148ec2f24b1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "supabase_service_role_api_key_00c3",
+      "secret": true
+    }
+  ]
+}

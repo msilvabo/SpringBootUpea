@@ -23,7 +23,7 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
             + " where i.order.id = ?1")
     Double getTotalPriceJPQL(UUID id);
 
-    @Query("SELECT new com.postgrado.ecommerce.dto.OrderItemDto(p.id, i.quantity, p.price*i.quantity) FROM OrderItem i"
+    @Query("SELECT new com.postgrado.ecommerce.dto.OrderItemDto(p.id, p.name, i.quantity, p.price*i.quantity) FROM OrderItem i"
             + " left join i.product p "
             + " where i.order.id = ?1")
     List<OrderItemDto> getItemWithTotalPrice(UUID id);

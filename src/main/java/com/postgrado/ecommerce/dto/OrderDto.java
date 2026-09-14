@@ -6,18 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
 @Setter
 public class OrderDto {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private UUID id;
+
+    private LocalDateTime date;
+
     private String comment;
     private List<OrderItemDto> items;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Double totalPrice;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OrderState state;
 }

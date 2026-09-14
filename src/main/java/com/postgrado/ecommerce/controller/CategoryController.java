@@ -12,10 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.postgrado.ecommerce.exception.response.ErrorResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -64,6 +61,83 @@ public class CategoryController {
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
         return ResponseEntity.status(HttpStatus.OK).body(categories);
+    }
+
+    @Operation(
+            summary = "Create new Category",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Category Created",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = Category.class)
+                            )
+                    )
+            }
+    )
+    @PostMapping
+    public ResponseEntity<Category> create(@RequestBody Category category) {
+        Category categoryCreated = categoryService.createCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryCreated);
+    }
+
+    @Operation(
+            summary = "Update Category by ID",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Category Updated",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = Category.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Category not Found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorResponse.class)
+                            )
+                    )
+            }
+    )
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> update(
+            @Parameter(description = "Category Id for update")
+            @PathVariable UUID id,
+            @RequestBody Category category
+    ) {
+        Category categoryUpdated = categoryService.updateCategory(id, category);
+        return ResponseEntity.status(HttpStatus.OK).body(categoryUpdated);
+    }
+
+    @Operation(
+            summary = "Delete Category by ID",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "Category Deleted"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Category not Found",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ErrorResponse.class)
+                            )
+                    )
+            }
+    )
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(
+            @Parameter(description = "Category Id for delete")
+            @PathVariable UUID id
+    ) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

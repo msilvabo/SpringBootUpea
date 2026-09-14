@@ -9,6 +9,8 @@ import com.postgrado.ecommerce.entity.User;
 import com.postgrado.ecommerce.exception.EntityNotFoundException;
 import com.postgrado.ecommerce.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -57,11 +59,55 @@ public class OrderServiceImpl implements OrderService{
 
         Order order = orderRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Order", id));
         OrderDto orderDto = new OrderDto();
+        orderDto.setId(order.getId());
+        orderDto.setDate(order.getDate());
         orderDto.setComment(order.getComment());
         orderDto.setTotalPrice(orderRepository.getTotalPriceNative(id));
         orderDto.setState(order.getState());
         orderDto.setItems(orderRepository.getItemWithTotalPrice(id));
 
         return orderDto;
+    }
+
+    @Override
+    public Page<OrderDto> getOrders(Pageable pageable) {
+        Page<Order> orders = orderRepository.findAll(pageable);
+        return orders.map(order -> {
+            OrderDto dto = new OrderDto();
+            dto.setId(order.getId());
+            dto.setDate(order.getDate());
+            dto.setComment(order.getComment());
+            dto.setState(order.getState());
+            dto.setTotalPrice(orderRepository.getTotalPriceNative(order.getId()));
+            dto.setItems(orderRepository.getItemWithTotalPrice(order.getId()));
+            return dto;
+        });
+    }
+
+    @Override
+    public Order updateOrder(UUID id, OrderDto orderDto) {
+        Order existingOrder = orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order", id));
+        existingOrder.setComment(orderDto.getComment());
+        if (orderDto.getComment() != null) {
+            existingOrder.setComment(orderDto.getComment());
+        }
+        if (orderDto.getDate() != null) {
+            existingOrder.setDate(orderDto.getDate());
+        }
+        if (orderDto.getState() != null) {
+            existingOrder.setState(orderDto.getState());
+        }
+        if (orderDto.getItems() != null) {
+            List<OrderItem> items = orderDto.getItems().stream().map((itemDto) -> {
+                OrderItem item = new OrderItem();
+                item.setQuantity(itemDto.getQuantity());
+                Product product = productService.getById(itemDto.getProductId());
+                item.setProduct(product);
+                item.setOrder(existingOrder);
+                return item;
+            }).toList();
+            existingOrder.setItems(items);
+        }
+        return orderRepository.save(existingOrder);
     }
 }

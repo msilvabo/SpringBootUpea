@@ -8,6 +8,7 @@ import com.postgrado.ecommerce.exception.EntityNotFoundException;
 import com.postgrado.ecommerce.mapper.ProductMapper;
 import com.postgrado.ecommerce.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,8 +42,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getProducts(Pageable pageable) {
+    public Page<Product> getProducts(Pageable pageable, Boolean active, String term) {
+        if (term != null && !term.trim().isEmpty()) {
+            return productRepository.searchProducts(term.trim(), active, pageable);
+        }
+        if (active != null) {
+            return productRepository.findByActive(active, pageable);
+        }
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> getProducts(Pageable pageable, Boolean active) {
+        return getProducts(pageable, active, null);
     }
 
     @Override
@@ -54,6 +66,21 @@ public class ProductServiceImpl implements ProductService {
     public PageDto<Product> getFilteredProductsDto(Double priceMin, Double priceMax, Pageable pageable) {
         Page<Product> page = productRepository.findByPriceBetween(priceMin, priceMax, pageable);
         return productMapper.fromEntity(page);
+    }
+
+    @Override
+    public Product updateProduct(UUID id, ProductDto dto) {
+        Product existingProduct = productRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("Product", id));
+        Category category = categoryService.getById(dto.getCategoryId());
+        existingProduct.setName(dto.getName());
+        existingProduct.setDescription(dto.getDescription());
+        existingProduct.setImageUrl(dto.getImageUrl());
+        existingProduct.setPrice(dto.getPrice());
+        existingProduct.setStock(dto.getStock());
+        existingProduct.setActive(dto.isActive());
+        existingProduct.setCategory(category);
+
+        return productRepository.save(existingProduct);
     }
 }
 
