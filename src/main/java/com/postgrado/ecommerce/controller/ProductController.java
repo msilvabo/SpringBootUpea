@@ -51,10 +51,11 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false) Boolean active,
-            @RequestParam(required = false) String term
+            @RequestParam(required = false) String term,
+            @RequestParam(required = false) java.util.List<UUID> categoryIds
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productsPage = productService.getProducts(pageable, active, term);
+        Page<Product> productsPage = productService.getProducts(pageable, active, term, categoryIds);
         return ResponseEntity.status(HttpStatus.OK).body(productsPage);
     }
 

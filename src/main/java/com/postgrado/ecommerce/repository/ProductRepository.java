@@ -17,6 +17,16 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Query("SELECT p FROM Product p LEFT JOIN p.category c WHERE " +
            "(:active IS NULL OR p.active = :active) AND " +
-           "(:term IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :term, '%')) OR LOWER(p.description) LIKE LOWER(CONCAT('%', :term, '%')) OR LOWER(c.name) LIKE LOWER(CONCAT('%', :term, '%')))")
+           "(:term IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', CAST(:term AS string), '%')) " +
+           "OR LOWER(p.description) LIKE LOWER(CONCAT('%', CAST(:term AS string), '%')) " +
+           "OR LOWER(c.name) LIKE LOWER(CONCAT('%', CAST(:term AS string), '%')))")
     Page<Product> searchProducts(@Param("term") String term, @Param("active") Boolean active, Pageable pageable);
+
+    @Query("SELECT p FROM Product p LEFT JOIN p.category c WHERE " +
+           "(:active IS NULL OR p.active = :active) AND " +
+           "c.id IN :categoryIds AND " +
+           "(:term IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', CAST(:term AS string), '%')) " +
+           "OR LOWER(p.description) LIKE LOWER(CONCAT('%', CAST(:term AS string), '%')) " +
+           "OR LOWER(c.name) LIKE LOWER(CONCAT('%', CAST(:term AS string), '%')))")
+    Page<Product> searchProductsWithCategories(@Param("term") String term, @Param("active") Boolean active, @Param("categoryIds") java.util.List<UUID> categoryIds, Pageable pageable);
 }

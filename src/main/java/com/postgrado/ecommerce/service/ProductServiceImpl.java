@@ -42,9 +42,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getProducts(Pageable pageable, Boolean active, String term) {
-        if (term != null && !term.trim().isEmpty()) {
-            return productRepository.searchProducts(term.trim(), active, pageable);
+    public Page<Product> getProducts(Pageable pageable, Boolean active, String term, java.util.List<UUID> categoryIds) {
+        String cleanTerm = (term != null && !term.trim().isEmpty()) ? term.trim() : null;
+        if (categoryIds != null && !categoryIds.isEmpty()) {
+            return productRepository.searchProductsWithCategories(cleanTerm, active, categoryIds, pageable);
+        }
+        if (cleanTerm != null) {
+            return productRepository.searchProducts(cleanTerm, active, pageable);
         }
         if (active != null) {
             return productRepository.findByActive(active, pageable);
@@ -53,8 +57,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<Product> getProducts(Pageable pageable, Boolean active, String term) {
+        return getProducts(pageable, active, term, null);
+    }
+
+    @Override
     public Page<Product> getProducts(Pageable pageable, Boolean active) {
-        return getProducts(pageable, active, null);
+        return getProducts(pageable, active, null, null);
     }
 
     @Override

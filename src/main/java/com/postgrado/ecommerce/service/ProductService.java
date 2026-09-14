@@ -14,9 +14,12 @@ public interface ProductService {
 
     Product getById(UUID id);
 
-    Page<Product> getProducts(Pageable pageable, Boolean active, String term);
+    Page<Product> getProducts(Pageable pageable, Boolean active, String term, java.util.List<UUID> categoryIds);
+    default Page<Product> getProducts(Pageable pageable, Boolean active, String term) {
+        return getProducts(pageable, active, term, null);
+    }
     default Page<Product> getProducts(Pageable pageable, Boolean active) {
-        return getProducts(pageable, active, null);
+        return getProducts(pageable, active, null, null);
     }
 
     Page<Product> getFilteredProducts(Double priceMin, Double priceMax, Pageable pageable);
