@@ -8,6 +8,7 @@ import com.postgrado.ecommerce.entity.Product;
 import com.postgrado.ecommerce.entity.User;
 import com.postgrado.ecommerce.exception.EntityNotFoundException;
 import com.postgrado.ecommerce.repository.OrderRepository;
+import com.postgrado.ecommerce.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService{
 
     ProductService productService;
+    UserRepository userRepository;
     OrderRepository orderRepository;
 
     @Override
@@ -37,7 +39,8 @@ public class OrderServiceImpl implements OrderService{
                 return item;
                 }).toList();
         order.setItems(items);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findFirstByOrderByIdDesc().orElseThrow();
         order.setUser(user);
         Order orderSaved = orderRepository.save(order);
         return "Order saved successful";
