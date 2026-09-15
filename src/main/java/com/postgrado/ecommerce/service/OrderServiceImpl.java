@@ -2,10 +2,7 @@ package com.postgrado.ecommerce.service;
 
 import com.postgrado.ecommerce.dto.OrderDto;
 import com.postgrado.ecommerce.dto.OrderItemDto;
-import com.postgrado.ecommerce.entity.Order;
-import com.postgrado.ecommerce.entity.OrderItem;
-import com.postgrado.ecommerce.entity.Product;
-import com.postgrado.ecommerce.entity.User;
+import com.postgrado.ecommerce.entity.*;
 import com.postgrado.ecommerce.exception.EntityNotFoundException;
 import com.postgrado.ecommerce.repository.OrderRepository;
 import com.postgrado.ecommerce.repository.UserRepository;
@@ -112,5 +109,13 @@ public class OrderServiceImpl implements OrderService{
             existingOrder.setItems(items);
         }
         return orderRepository.save(existingOrder);
+    }
+
+    @Override
+    public Void updateState(UUID id, OrderState orderState) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order", id));
+        order.setState(orderState);
+        orderRepository.save(order);
+        return null;
     }
 }

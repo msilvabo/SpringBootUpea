@@ -4,6 +4,7 @@ import com.postgrado.ecommerce.dto.OrderDto;
 import com.postgrado.ecommerce.dto.OrderItemDto;
 import com.postgrado.ecommerce.dto.ProductDto;
 import com.postgrado.ecommerce.entity.Order;
+import com.postgrado.ecommerce.entity.OrderState;
 import com.postgrado.ecommerce.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,4 +24,6 @@ public interface OrderService {
     Page<OrderDto> getOrders(Pageable pageable);
 
     Order updateOrder(UUID id, OrderDto orderDto);
+
+    Void updateState (UUID id, OrderState orderState);
 }

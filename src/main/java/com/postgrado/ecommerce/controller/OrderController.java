@@ -2,10 +2,13 @@ package com.postgrado.ecommerce.controller;
 
 import com.postgrado.ecommerce.dto.OrderDto;
 import com.postgrado.ecommerce.dto.OrderItemDto;
+import com.postgrado.ecommerce.dto.OrderStateUpdateRequest;
 import com.postgrado.ecommerce.entity.Order;
+import com.postgrado.ecommerce.entity.OrderState;
 import com.postgrado.ecommerce.entity.Product;
 import com.postgrado.ecommerce.service.OrderService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,4 +62,13 @@ public class OrderController {
         OrderDto orderDto = orderService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(orderDto);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateOrderState(
+            @PathVariable UUID id,
+            @Valid @RequestBody OrderStateUpdateRequest request){
+        orderService.updateState(id, request.status());
+        return ResponseEntity.noContent().build();
+    }
+
 }
